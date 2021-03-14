@@ -9,7 +9,10 @@ import br.com.lcl.test.common.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class LoginViewModel(private val loginUseCase: LoginUseCase, private val prefs: SharedPreferences) : BaseViewModel() {
+class LoginViewModel(
+    private val loginUseCase: LoginUseCase,
+    private val prefs: SharedPreferences,
+    private val sessionUser: SessionUser) : BaseViewModel() {
 
     var stateLiveDate = MutableLiveData<LoginState>(LoginState.Init)
 
@@ -44,7 +47,6 @@ class LoginViewModel(private val loginUseCase: LoginUseCase, private val prefs: 
         val prefsEdit = this.prefs.edit()
         var usernameValue = this.username
         var passwordValue = this.password
-        prefsEdit.putString(PREF_TOKEN, token).apply()
         if (this.isSaveData) {
             usernameValue = ""
             passwordValue = ""
@@ -52,6 +54,8 @@ class LoginViewModel(private val loginUseCase: LoginUseCase, private val prefs: 
         prefsEdit.putString(PREF_USERNAME, usernameValue)
         prefsEdit.putString(PREF_PASSWORD, passwordValue)
         prefsEdit.apply()
+
+        this.sessionUser.token = token
     }
 
     fun loginButtonClicked() {

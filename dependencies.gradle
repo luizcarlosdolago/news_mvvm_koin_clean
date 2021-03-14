@@ -12,5 +12,6 @@ ext {
     koin = "org.koin:koin-android-viewmodel:2.2.2"
     koin_android = "org.koin:koin-android:2.2.2"
     koin_ext = "org.koin:koin-androidx-ext:2.2.2"
+    koin_test = "org.koin:koin-test:2.2.2"
     gson = "com.google.code.gson:gson:2.8.6"
 }

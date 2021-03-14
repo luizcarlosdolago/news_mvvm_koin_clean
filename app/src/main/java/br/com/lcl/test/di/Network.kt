@@ -3,6 +3,7 @@ package br.com.lcl.test.di
 import android.content.SharedPreferences
 import br.com.lcl.test.BuildConfig
 import br.com.lcl.test.common.PREF_TOKEN
+import br.com.lcl.test.common.SessionUser
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -21,16 +22,15 @@ fun createNetworkClient(baseUrl: String) =
 
 class BasicAuthInterceptor() : Interceptor {
 
-    val prefs: SharedPreferences by inject(SharedPreferences::class.java, named("shared_preferences"))
+    val sessionUser: SessionUser by inject(clazz = SessionUser::class.java, qualifier = named(SESSION_USER))
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
         val newRequestBuilder = original.newBuilder()
         if (isAuthorizationRequired(original)) {
-            val token = prefs.getString(PREF_TOKEN, "")
-            if (!token.isNullOrEmpty()) {
-                newRequestBuilder.addHeader("Authorization", "Bearer $token")
+            sessionUser.token?.let { itToken ->
+                newRequestBuilder.addHeader("Authorization", "Bearer $itToken")
             }
         }
         return chain.proceed(newRequestBuilder.build())

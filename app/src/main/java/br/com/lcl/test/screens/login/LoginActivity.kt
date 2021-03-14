@@ -111,8 +111,7 @@ class LoginActivity : AppCompatActivity() {
 
         Log.d(LoginActivity::class.java.simpleName, "#### error => ${state.error}")
         if (state.error is HttpException) {
-            val httpException = state.error as HttpException
-            if (httpException.response()?.code() == 401) {
+            if (state.error.response()?.code() == 401) {
                 this.binding.tilPassword.error = getString(R.string.text_error_credentials)
                 return
             }
