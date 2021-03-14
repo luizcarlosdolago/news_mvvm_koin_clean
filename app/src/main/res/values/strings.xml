@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MyTestNews</string>
+    <string name="text_user">Usuário</string>
+    <string name="text_password">Senha</string>
+    <string name="remember_password">Lembrar senha</string>
+    <string name="text_get_in">Entrar</string>
+    <string name="text_error_credentials">Usuário ou senha inválidos!</string>
+    <string name="text_error_generic">Ops! Infelizmente houve um problema, tente novamente mais tarde!</string>
+    <string name="cd_photo">Foto da Notícia</string>
+</resources>
