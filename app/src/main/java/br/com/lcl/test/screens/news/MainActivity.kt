@@ -3,8 +3,12 @@ package br.com.lcl.test.screens.news
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.app.SharedElementCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.lcl.domain.entities.NewsEntity
 import br.com.lcl.test.R
@@ -49,7 +53,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadingData() {
-        this.mainViewModel.load()
+        this.setEnterSharedElementCallback(object: SharedElementCallback() {
+            override fun onSharedElementEnd(sharedElementNames: MutableList<String>?, sharedElements: MutableList<View>?, sharedElementSnapshots: MutableList<View>?) {
+                super.onSharedElementEnd(sharedElementNames, sharedElements, sharedElementSnapshots)
+                Log.d(MainActivity::class.java.simpleName, "#### onSharedElementEnd")
+                Handler(Looper.getMainLooper()).postDelayed({
+                    this@MainActivity.mainViewModel.load()
+                }, 500)
+            }
+        })
     }
 
     private fun initState() {

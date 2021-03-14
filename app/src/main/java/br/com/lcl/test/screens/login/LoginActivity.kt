@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import br.com.lcl.test.screens.news.MainActivity
 import br.com.lcl.test.R
@@ -123,7 +124,7 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, binding.ivLogoApp, "logo_app_transition")
         startActivity(intent, options.toBundle())
-        this.finish()
+        ActivityCompat.finishAfterTransition(this);
     }
 
 }
