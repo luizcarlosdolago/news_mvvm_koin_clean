@@ -87,6 +87,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun errorState(state: MainState.Error) {
+        this.binding.pbLoading.visibility = View.GONE
         Snackbar.make(this.binding.recyclerView, getString(R.string.text_error_generic), Snackbar.LENGTH_SHORT).show()
     }
 

@@ -117,6 +117,7 @@ class LoginActivity : AppCompatActivity() {
                 return
             }
         }
+        this.binding.btLogin.isEnabled = true
         Snackbar.make(this.binding.btLogin, getString(R.string.text_error_generic), Snackbar.LENGTH_SHORT).show()
     }
 

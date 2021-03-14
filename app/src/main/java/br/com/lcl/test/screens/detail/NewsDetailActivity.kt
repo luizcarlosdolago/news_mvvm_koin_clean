@@ -88,6 +88,8 @@ class NewsDetailActivity : AppCompatActivity() {
     }
 
     private fun errorState(state: NewsDetailState.Error) {
+        this.binding.pbLoading.visibility = View.GONE
+        this.binding.scrollView.visibility = View.GONE
         Snackbar.make(this.binding.tvTitle, getString(R.string.text_error_generic), Snackbar.LENGTH_SHORT).show()
     }
 
